@@ -38,7 +38,7 @@ export default function Login() {
       <div className={styles.card}>
         <div className={styles.logo}>⬡ Rentasan</div>
         <h1 className={styles.title}>Welcome back</h1>
-        <p className={styles.sub}>Actual secure authentication for your items</p>
+        <p className={styles.sub}>Luxury rentals at your fingertips</p>
         
         {error && <div className={styles.error}>{error}</div>}
 

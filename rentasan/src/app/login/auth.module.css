@@ -8,6 +8,41 @@
               radial-gradient(circle at bottom left, rgba(245, 158, 11, 0.05), transparent);
 }
 
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 48px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #8B5CF6;
+  margin-bottom: 24px;
+  letter-spacing: -0.03em;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #F8FAFC;
+  margin-bottom: 8px;
+}
+
+.sub {
+  color: #94A3B8;
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+}
+
 .error {
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.2);
@@ -19,66 +54,101 @@
   text-align: center;
 }
 
-.clerkWrapper {
+.authTabs {
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: 14px;
+  margin-bottom: 32px;
+}
+
+.authTab {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #94A3B8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.activeAuthTab {
+  background: #8B5CF6;
+  color: white;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 32px 0;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.divider span {
+  padding: 0 16px;
+}
+
+.socialBtn {
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
-  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 12px;
+  padding: 14px;
+  background: white;
+  color: #1E293B;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* Clerk Component Overrides */
-.clerkCard {
-  background: var(--glass) !important;
-  backdrop-filter: blur(24px) !important;
-  border: 1px solid var(--glass-border) !important;
-  box-shadow: var(--shadow) !important;
-  border-radius: var(--radius-lg) !important;
+.socialBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  background: #F8FAFC;
 }
 
-.clerkTitle {
-  color: var(--text-primary) !important;
-  font-weight: 800 !important;
+.switch {
+  margin-top: 36px;
+  font-size: 0.9rem;
+  color: #94A3B8;
 }
 
-.clerkSub {
-  color: var(--text-secondary) !important;
+.switch a {
+  color: #A78BFA;
+  font-weight: 700;
+  text-decoration: none;
 }
 
-.clerkSocial {
-  background: white !important;
-  color: #1f2937 !important;
-  border: none !important;
-  border-radius: 50px !important;
-  font-weight: 600 !important;
-}
-
-.clerkPrimary {
-  background: var(--accent) !important;
-  color: white !important;
-  border-radius: 50px !important;
-  font-weight: 700 !important;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
-}
-
-.clerkPrimary:hover {
-  background: var(--accent-light) !important;
-}
-
-.clerkLink {
-  color: var(--accent-light) !important;
-  font-weight: 600 !important;
-}
-
-.clerkInput {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid var(--glass-border) !important;
-  color: var(--text-primary) !important;
-  border-radius: 12px !important;
-}
-
-.clerkLabel {
-  color: var(--text-secondary) !important;
-  font-weight: 600 !important;
+.switch a:hover {
+  color: #8B5CF6;
+  text-decoration: underline;
 }
 
 @keyframes fadeInUp {
@@ -87,7 +157,8 @@
 }
 
 @media (max-width: 480px) {
-  .clerkWrapper {
-    padding: 0;
+  .card {
+    padding: 32px 24px;
+    border-radius: 20px;
   }
 }

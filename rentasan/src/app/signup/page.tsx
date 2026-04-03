@@ -29,7 +29,7 @@ export default function Signup() {
       <div className={styles.card}>
         <div className={styles.logo}>⬡ Rentasan</div>
         <h1 className={styles.title}>Create account</h1>
-        <p className={styles.sub}>Join the largest premium rental network</p>
+        <p className={styles.sub}>Join India&apos;s premium rental marketplace</p>
         
         {error && <div className={styles.error}>{error}</div>}
 
