@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
-  basePath: '/Rentasan',
+  // basePath: '/Rentasan', // Removed for custom domain at root
 };
 
 export default nextConfig;
