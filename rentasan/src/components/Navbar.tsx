@@ -7,7 +7,7 @@ import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const { itemCount } = useCart();
-  const { user, logout } = useAuth();
+  const { user, logout, isLoading } = useAuth();
   const [open, setOpen] = useState(false);
 
   return (
@@ -27,17 +27,21 @@ export default function Navbar() {
           <Link href="/cart" className={styles.cartBtn}>
             🛒 {itemCount > 0 && <span className={styles.badge}>{itemCount}</span>}
           </Link>
-          {user ? (
-            <div className={styles.userMenu}>
-              <span className={styles.userName}>{user.name.split(' ')[0]}</span>
-              <button onClick={logout} className={styles.logoutBtn}>Logout</button>
-            </div>
-          ) : (
-            <Link href="/login" className={styles.loginBtn}>Login</Link>
+          
+          {!isLoading && (
+            user ? (
+              <div className={styles.userMenu}>
+                <span className={styles.userName}>{user.name.split(' ')[0]}</span>
+                <button onClick={logout} className={styles.logoutBtn}>Logout</button>
+              </div>
+            ) : (
+              <Link href="/login" className={styles.loginBtn}>Login</Link>
+            )
           )}
         </div>
         <button className={styles.hamburger} onClick={() => setOpen(o => !o)} aria-label="menu">☰</button>
       </div>
+
       {open && (
         <div className={styles.mobileMenu}>
           <Link href="/browse" onClick={() => setOpen(false)}>Browse</Link>

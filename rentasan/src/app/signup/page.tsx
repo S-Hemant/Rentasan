@@ -7,12 +7,21 @@ import styles from '../login/auth.module.css';
 export default function Signup() {
   const { signup, loginWithGoogle, isLoading } = useAuth();
   const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [error, setError] = useState('');
 
-  const handle = (e: React.ChangeEvent<HTMLInputElement>) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  const handle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+    setError('');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await signup(form.name, form.email, form.password);
+    setError('');
+    try {
+      await signup(form.name, form.email, form.password);
+    } catch (err: any) {
+      setError(err.message || 'Signup failed. Please try again.');
+    }
   };
 
   return (
@@ -20,8 +29,10 @@ export default function Signup() {
       <div className={styles.card}>
         <div className={styles.logo}>⬡ Rentasan</div>
         <h1 className={styles.title}>Create account</h1>
-        <p className={styles.sub}>Join India&apos;s premium rental marketplace</p>
+        <p className={styles.sub}>Join the largest premium rental network</p>
         
+        {error && <div className={styles.error}>{error}</div>}
+
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label">Full Name</label>
@@ -36,7 +47,7 @@ export default function Signup() {
             <input name="password" type="password" className="form-input" placeholder="Min 8 characters" value={form.password} onChange={handle} required minLength={8} />
           </div>
           <button type="submit" className="btn-gold" disabled={isLoading} style={{width:'100%',justifyContent:'center',marginTop:'12px'}}>
-            {isLoading ? 'Processing...' : 'Create Account →'}
+            {isLoading ? 'Creating Account...' : 'Create Account →'}
           </button>
         </form>
 

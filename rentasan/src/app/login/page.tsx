@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import styles from './auth.module.css';
@@ -7,14 +7,30 @@ import styles from './auth.module.css';
 export default function Login() {
   const { login, loginWithGoogle, loginWithPhone, isLoading } = useAuth();
   const [method, setMethod] = useState<'email' | 'phone'>('email');
-  const [form, setForm] = useState({ email: '', password: '', phone: '' });
+  const [form, setForm] = useState({ email: '', password: '', phone: '', otp: '' });
+  const [confirmationResult, setConfirmationResult] = useState<any>(null);
+  const [error, setError] = useState('');
 
-  const handle = (e: React.ChangeEvent<HTMLInputElement>) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  const handle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+    setError('');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (method === 'email') await login(form.email, form.password);
-    else await loginWithPhone(form.phone);
+    setError('');
+    try {
+      if (method === 'email') {
+        await login(form.email, form.password);
+      } else if (!confirmationResult) {
+        const res = await loginWithPhone(form.phone, 'recaptcha-container');
+        setConfirmationResult(res);
+      } else {
+        await confirmationResult.confirm(form.otp);
+      }
+    } catch (err: any) {
+      setError(err.message || 'Authentication failed. Please try again.');
+    }
   };
 
   return (
@@ -22,8 +38,10 @@ export default function Login() {
       <div className={styles.card}>
         <div className={styles.logo}>⬡ Rentasan</div>
         <h1 className={styles.title}>Welcome back</h1>
-        <p className={styles.sub}>Luxury rentals at your fingertips</p>
+        <p className={styles.sub}>Actual secure authentication for your items</p>
         
+        {error && <div className={styles.error}>{error}</div>}
+
         <div className={styles.authTabs}>
           <button className={`${styles.authTab} ${method==='email'?styles.activeAuthTab:''}`} onClick={()=>setMethod('email')}>Email</button>
           <button className={`${styles.authTab} ${method==='phone'?styles.activeAuthTab:''}`} onClick={()=>setMethod('phone')}>Phone</button>
@@ -42,14 +60,24 @@ export default function Login() {
               </div>
             </>
           ) : (
-            <div className="form-group">
-              <label className="form-label">Phone Number</label>
-              <input name="phone" type="tel" className="form-input" placeholder="+91 99999 99999" value={form.phone} onChange={handle} required />
-            </div>
+            <>
+              {!confirmationResult ? (
+                <div className="form-group">
+                  <label className="form-label">Phone Number</label>
+                  <input name="phone" type="tel" className="form-input" placeholder="+91 99999 99999" value={form.phone} onChange={handle} required />
+                </div>
+              ) : (
+                <div className="form-group">
+                  <label className="form-label">One-Time Password (OTP)</label>
+                  <input name="otp" className="form-input" placeholder="6-digit code" value={form.otp} onChange={handle} required />
+                </div>
+              )}
+              <div id="recaptcha-container"></div>
+            </>
           )}
           
           <button type="submit" className="btn-primary" disabled={isLoading} style={{width:'100%',justifyContent:'center',marginTop:'12px'}}>
-            {isLoading ? 'Processing...' : 'Continue →'}
+            {isLoading ? 'Processing...' : confirmationResult ? 'Verify OTP →' : 'Continue →'}
           </button>
         </form>
 

@@ -121,24 +121,22 @@ function ListContent() {
 
 export default function ListProduct() {
   return (
-    <CartProvider><WishlistProvider>
-      <div className={styles.page}>
-        <div className="container">
-          <div className={styles.header}>
-            <div>
-              <span className="badge badge-gold" style={{marginBottom:'12px',display:'inline-block'}}>✨ Earn Money</span>
-              <h1 className={styles.title}>List Your Product</h1>
-              <p className={styles.sub}>Turn your idle belongings into a steady income. It&apos;s free to list and takes just 2 minutes.</p>
-            </div>
-            <div className={styles.perks}>
-              <div className={styles.perk}><span>🆓</span><p>Free to list</p></div>
-              <div className={styles.perk}><span>💸</span><p>You set the price</p></div>
-              <div className={styles.perk}><span>🛡️</span><p>Insured items</p></div>
-            </div>
+    <div className={styles.page}>
+      <div className="container">
+        <div className={styles.header}>
+          <div>
+            <span className="badge badge-gold" style={{marginBottom:'12px',display:'inline-block'}}>✨ Earn Money</span>
+            <h1 className={styles.title}>List Your Product</h1>
+            <p className={styles.sub}>Turn your idle belongings into a steady income. It&apos;s free to list and takes just 2 minutes.</p>
           </div>
-          <ListContent />
+          <div className={styles.perks}>
+            <div className={styles.perk}><span>🆓</span><p>Free to list</p></div>
+            <div className={styles.perk}><span>💸</span><p>You set the price</p></div>
+            <div className={styles.perk}><span>🛡️</span><p>Insured items</p></div>
+          </div>
         </div>
+        <ListContent />
       </div>
-    </WishlistProvider></CartProvider>
+    </div>
   );
 }

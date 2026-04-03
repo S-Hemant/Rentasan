@@ -98,6 +98,6 @@ function BrowseContent() {
 
 export default function Browse() {
   return (
-    <CartProvider><WishlistProvider><BrowseContent /></WishlistProvider></CartProvider>
+    <BrowseContent />
   );
 }
