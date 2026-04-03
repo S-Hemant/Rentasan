@@ -1,0 +1,6 @@
+.page { padding: 100px 0 80px; min-height: 100vh; }
+.title { font-size: 2rem; font-weight: 800; color: #F1F5F9; margin-bottom: 36px; }
+.empty { text-align: center; padding: 100px 0; }
+.icon { font-size: 4rem; color: #EF4444; margin-bottom: 20px; }
+.empty h2 { font-size: 1.5rem; font-weight: 700; color: #F1F5F9; margin-bottom: 12px; }
+.empty p { color: #64748B; margin-bottom: 28px; }

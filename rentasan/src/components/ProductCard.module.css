@@ -1,0 +1,71 @@
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow);
+  border-color: var(--border-accent);
+}
+.imgWrap { display: block; position: relative; height: 220px; overflow: hidden; background: #0F172A; }
+.img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.card:hover .img { transform: scale(1.08); }
+.overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,15,30,0.7) 0%, transparent 55%);
+}
+.userBadge {
+  position: absolute; top: 10px; left: 10px;
+  background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4);
+  color: #FCD34D; font-size: 0.7rem; font-weight: 600;
+  padding: 3px 10px; border-radius: 50px;
+}
+.wishBtn {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(10,15,30,0.6); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1); color: #94A3B8;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; transition: all 0.2s; cursor: pointer;
+}
+.wishedBtn { color: #EF4444 !important; border-color: rgba(239,68,68,0.5) !important; }
+.wishBtn:hover { transform: scale(1.15); }
+.body { padding: 20px; }
+.cat {
+  font-size: 0.7rem; font-weight: 700; color: var(--accent-light);
+  text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px;
+}
+.name {
+  font-size: 1.05rem; font-weight: 700; color: var(--text-primary);
+  line-height: 1.3; margin-bottom: 8px; transition: color 0.2s;
+}
+.name:hover { color: var(--accent-light); }
+.meta { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.stars { color: var(--gold); font-size: 0.75rem; letter-spacing: 1px; }
+.reviews { color: var(--text-muted); font-size: 0.75rem; }
+.location { color: var(--text-muted); font-size: 0.72rem; margin-left: auto; }
+.pricing { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+.price { font-size: 1.25rem; font-weight: 800; color: var(--text-primary); }
+.price span { font-size: 0.8rem; font-weight: 400; color: var(--text-secondary); }
+.dayPrice { font-size: 0.8rem; color: var(--gold); font-weight: 600; }
+.rentBtn {
+  width: 100%; padding: 12px; border-radius: 50px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: white; font-weight: 700; font-size: 0.9rem;
+  transition: var(--transition); cursor: pointer; border: none;
+}
+.rentBtn:hover:not(:disabled) {
+  box-shadow: var(--shadow-accent);
+  transform: translateY(-2px);
+}
+.rentedBtn {
+  background: rgba(16,185,129,0.15) !important;
+  color: #34D399 !important;
+  border: 1px solid rgba(16,185,129,0.35) !important;
+  cursor: default;
+}
