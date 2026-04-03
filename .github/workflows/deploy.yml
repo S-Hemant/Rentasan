@@ -24,14 +24,17 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
+          cache-dependency-path: "./rentasan/package-lock.json"
       - name: Install dependencies
+        working-directory: rentasan
         run: npm ci
       - name: Static Build
+        working-directory: rentasan
         run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: rentasan/out
 
   deploy:
     environment:
